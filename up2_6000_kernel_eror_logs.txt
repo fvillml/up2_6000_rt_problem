@@ -1,0 +1,318 @@
+[  229.637262] BUG: unable to handle page fault for address: 0000054000000150
+[  229.637270] #PF: supervisor write access in kernel mode
+[  229.637273] #PF: error_code(0x0002) - not-present page
+[  229.637275] PGD 0 P4D 0 
+[  229.637279] Oops: 0002 [#1] PREEMPT_RT SMP NOPTI
+[  229.637283] CPU: 0 PID: 2585 Comm: git Not tainted 5.13.0-rt1 #1
+[  229.637287] Hardware name: AAEON UPN-EHL01/UPN-EHL01, BIOS UNEHAM19 04/07/2022
+[  229.637289] RIP: 0010:deactivate_slab+0x5b9/0x620
+[  229.637298] Code: 30 4c 8b 44 24 28 48 89 c3 e9 e2 fc ff ff e8 15 de d0 ff e9 23 fd ff ff 48 8b 7e 30 48 89 46 30 49 89 4c 24 08 49 89 7c 24 10 <48> 89 07 41 8b 46 08 e9 41 fc ff ff 48 8b 7c 24 48 e8 51 57 92 00
+[  229.637301] RSP: 0018:ffffa639c1eb79a0 EFLAGS: 00010246
+[  229.637304] RAX: ffffe4074415c110 RBX: 0000000000000000 RCX: ffff99a1001dfef8
+[  229.637306] RDX: 00000001ffffffff RSI: ffff99a1001dfed0 RDI: 0000054000000150
+[  229.637308] RBP: ffffa639c1eb7a70 R08: 0000000000190010 R09: 0000000000000000
+[  229.637310] R10: 0000000000000007 R11: 0000000000190010 R12: ffffe4074415c108
+[  229.637311] R13: 0000000000000000 R14: ffff99a1001dde00 R15: 0000000000000001
+[  229.637313] FS:  00007ff69fa10f40(0000) GS:ffff99a264000000(0000) knlGS:0000000000000000
+[  229.637316] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  229.637318] CR2: 0000054000000150 CR3: 0000000108760000 CR4: 0000000000350ef0
+[  229.637320] Call Trace:
+[  229.637327]  ? ext4_htree_store_dirent+0x3e/0x110
+[  229.637333]  ? debug_smp_processor_id+0x17/0x20
+[  229.637339]  ? __find_get_block+0x2f7/0x360
+[  229.637345]  ___slab_alloc+0x7df/0x910
+[  229.637359]  ? __alloc_file+0x28/0x130
+[  229.637364]  ? __alloc_file+0x28/0x130
+[  229.637367]  __slab_alloc.isra.0+0x4a/0x60
+[  229.637370]  ? __alloc_file+0x28/0x130
+[  229.637372]  kmem_cache_alloc+0xb8/0x430
+[  229.637376]  __alloc_file+0x28/0x130
+[  229.637378]  alloc_empty_file+0x46/0xc0
+[  229.637381]  path_openat+0x4c/0x1140
+[  229.637384]  ? rt_spin_unlock+0x18/0x50
+[  229.637388]  ? ___slab_alloc+0x4e9/0x910
+[  229.637391]  ? getname_flags+0x4f/0x1f0
+[  229.637394]  ? dput+0x60/0x330
+[  229.637397]  do_filp_open+0xa2/0x110
+[  229.637400]  ? debug_smp_processor_id+0x17/0x20
+[  229.637403]  ? migrate_enable+0xa4/0x100
+[  229.637408]  ? __slab_alloc.isra.0+0x52/0x60
+[  229.637412]  ? rt_spin_unlock+0x18/0x50
+[  229.637416]  do_sys_openat2+0x241/0x310
+[  229.637420]  do_sys_open+0x46/0x80
+[  229.637423]  __x64_sys_openat+0x20/0x30
+[  229.637426]  do_syscall_64+0x61/0xb0
+[  229.637429]  ? __x64_sys_newfstat+0x16/0x20
+[  229.637433]  ? do_syscall_64+0x6e/0xb0
+[  229.637435]  ? do_syscall_64+0x6e/0xb0
+[  229.637437]  ? syscall_exit_to_user_mode+0x27/0x50
+[  229.637440]  ? do_syscall_64+0x6e/0xb0
+[  229.637442]  ? do_syscall_64+0x6e/0xb0
+[  229.637445]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[  229.637448] RIP: 0033:0x7ff69fc17b34
+[  229.637452] Code: 24 20 eb 8f 66 90 44 89 54 24 0c e8 26 f5 ff ff 44 8b 54 24 0c 44 89 e2 48 89 ee 41 89 c0 bf 9c ff ff ff b8 01 01 00 00 0f 05 <48> 3d 00 f0 ff ff 77 32 44 89 c7 89 44 24 0c e8 58 f5 ff ff 8b 44
+[  229.637454] RSP: 002b:00007ffd972518c0 EFLAGS: 00000293 ORIG_RAX: 0000000000000101
+[  229.637457] RAX: ffffffffffffffda RBX: 000055e9cd608380 RCX: 00007ff69fc17b34
+[  229.637458] RDX: 0000000000000000 RSI: 000055e9cd8fe030 RDI: 00000000ffffff9c
+[  229.637460] RBP: 000055e9cd8fe030 R08: 0000000000000000 R09: 0000000000000000
+[  229.637461] R10: 0000000000000000 R11: 0000000000000293 R12: 0000000000000000
+[  229.637463] R13: 000055e9cd8fe030 R14: 0000000000000018 R15: 000055e9cd8e9fd8
+[  229.637467] Modules linked in: snd_hda_codec_hdmi snd_hda_codec_realtek snd_hda_codec_generic binfmt_misc xt_conntrack xt_MASQUERADE nf_conntrack_netlink nfnetlink xfrm_user xfrm_algo xt_addrtype iptable_filter iptable_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 bpfilter br_netfilter bridge stp llc ccm overlay nls_iso8859_1 dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua intel_rapl_msr mei_hdcp intel_rapl_common x86_pkg_temp_thermal intel_powerclamp coretemp snd_sof_pci_intel_tgl kvm_intel snd_sof_intel_hda_common kvm soundwire_intel soundwire_generic_allocation soundwire_cadence snd_sof_intel_hda intel_cstate snd_sof_pci snd_sof_xtensa_dsp snd_sof snd_soc_hdac_hda snd_hda_ext_core snd_soc_acpi_intel_match snd_soc_acpi soundwire_bus ledtrig_audio asus_nb_wmi asus_wmi snd_soc_core sparse_keymap intel_wmi_thunderbolt wmi_bmof snd_compress ac97_bus snd_pcm_dmaengine snd_hda_intel snd_intel_dspcfg snd_intel_sdw_acpi snd_hda_codec iTCO_wdt snd_hda_core iwlmvm intel_pmc_bxt
+[  229.637524]  snd_hwdep iTCO_vendor_support snd_pcm mac80211 libarc4 snd_timer snd btusb soundcore iwlwifi btrtl btbcm btintel cfg80211 bluetooth ecdh_generic ecc 8250_dw ti_adc128s052 industrialio mac_hid acpi_tad acpi_pad mei_me mei igen6_edac sch_fq_codel ipmi_devintf ipmi_msghandler ramoops msr reed_solomon efi_pstore ip_tables x_tables autofs4 btrfs blake2b_generic zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear spi_pxa2xx_platform dw_dmac dw_dmac_core mmc_block crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_intel crypto_simd cryptd i915 drm_kms_helper syscopyarea sysfillrect sysimgblt i2c_i801 fb_sys_fops i2c_smbus igb igc cec sdhci_pci dca i2c_algo_bit rc_core cqhci intel_lpss_pci ahci intel_lpss sdhci xhci_pci libahci drm xhci_pci_renesas idma64 wmi spidev video pinctrl_elkhartlake
+[  229.637601] CR2: 0000054000000150
+[  229.637605] ---[ end trace 0000000000000002 ]---
+[  229.743927] ------------[ cut here ]------------
+[  229.743942] WARNING: CPU: 2 PID: 2544 at mm/slub.c:2018 get_partial_node.part.0+0x397/0x480
+[  229.743955] Modules linked in: snd_hda_codec_hdmi snd_hda_codec_realtek snd_hda_codec_generic binfmt_misc xt_conntrack xt_MASQUERADE nf_conntrack_netlink nfnetlink xfrm_user xfrm_algo xt_addrtype iptable_filter iptable_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 bpfilter br_netfilter bridge stp llc ccm overlay nls_iso8859_1 dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua intel_rapl_msr mei_hdcp intel_rapl_common x86_pkg_temp_thermal intel_powerclamp coretemp snd_sof_pci_intel_tgl kvm_intel snd_sof_intel_hda_common kvm soundwire_intel soundwire_generic_allocation soundwire_cadence snd_sof_intel_hda intel_cstate snd_sof_pci snd_sof_xtensa_dsp snd_sof snd_soc_hdac_hda snd_hda_ext_core snd_soc_acpi_intel_match snd_soc_acpi soundwire_bus ledtrig_audio asus_nb_wmi asus_wmi snd_soc_core sparse_keymap intel_wmi_thunderbolt wmi_bmof snd_compress ac97_bus snd_pcm_dmaengine snd_hda_intel snd_intel_dspcfg snd_intel_sdw_acpi snd_hda_codec iTCO_wdt snd_hda_core iwlmvm intel_pmc_bxt
+[  229.744012]  snd_hwdep iTCO_vendor_support snd_pcm mac80211 libarc4 snd_timer snd btusb soundcore iwlwifi btrtl btbcm btintel cfg80211 bluetooth ecdh_generic ecc 8250_dw ti_adc128s052 industrialio mac_hid acpi_tad acpi_pad mei_me mei igen6_edac sch_fq_codel ipmi_devintf ipmi_msghandler ramoops msr reed_solomon efi_pstore ip_tables x_tables autofs4 btrfs blake2b_generic zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear spi_pxa2xx_platform dw_dmac dw_dmac_core mmc_block crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_intel crypto_simd cryptd i915 drm_kms_helper syscopyarea sysfillrect sysimgblt i2c_i801 fb_sys_fops i2c_smbus igb igc cec sdhci_pci dca i2c_algo_bit rc_core cqhci intel_lpss_pci ahci intel_lpss sdhci xhci_pci libahci drm xhci_pci_renesas idma64 wmi spidev video pinctrl_elkhartlake
+[  229.744088] CPU: 2 PID: 2544 Comm: node Tainted: G      D           5.13.0-rt1 #1
+[  229.744092] Hardware name: AAEON UPN-EHL01/UPN-EHL01, BIOS UNEHAM19 04/07/2022
+[  229.744094] RIP: 0010:get_partial_node.part.0+0x397/0x480
+[  229.744099] Code: 50 4c 89 4c 24 38 4c 89 44 24 40 e8 a3 74 fd ff 4c 8b 44 24 40 4c 8b 4c 24 38 84 c0 0f 84 d4 fe ff ff e9 1e fd ff ff 4d 89 c5 <0f> 0b e9 82 fd ff ff 48 89 74 24 38 48 89 4c 24 30 4c 89 44 24 20
+[  229.744102] RSP: 0018:ffffa639c2087ac0 EFLAGS: 00010246
+[  229.744105] RAX: ffff99a1001de080 RBX: 0000000000000000 RCX: 0000000080190019
+[  229.744107] RDX: ffffe40744412e88 RSI: 0000000000000000 RDI: ffff99a1001de080
+[  229.744109] RBP: ffffa639c2087ba0 R08: ffff99a1050a28c0 R09: ffff99a1001dde00
+[  229.744110] R10: ffff99a1074d6001 R11: 0000000000000000 R12: ffffe40744079a00
+[  229.744112] R13: ffff99a1050a28c0 R14: 0000000000000019 R15: 0000000000190019
+[  229.744114] FS:  00007fe4566107c0(0000) GS:ffff99a264100000(0000) knlGS:0000000000000000
+[  229.744116] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  229.744118] CR2: 00002a9c53636000 CR3: 00000001078b4000 CR4: 0000000000350ee0
+[  229.744120] Call Trace:
+[  229.744124]  ? __mod_memcg_lruvec_state+0xd4/0x180
+[  229.744133]  ? debug_smp_processor_id+0x17/0x20
+[  229.744139]  ? rt_spin_unlock+0x18/0x50
+[  229.744144]  ___slab_alloc+0x6a8/0x910
+[  229.744147]  ? __alloc_file+0x28/0x130
+[  229.744151]  ? __d_alloc+0x27/0x220
+[  229.744155]  ? debug_smp_processor_id+0x17/0x20
+[  229.744158]  ? __alloc_file+0x28/0x130
+[  229.744161]  __slab_alloc.isra.0+0x4a/0x60
+[  229.744164]  ? __alloc_file+0x28/0x130
+[  229.744166]  kmem_cache_alloc+0xb8/0x430
+[  229.744170]  __alloc_file+0x28/0x130
+[  229.744172]  alloc_empty_file+0x46/0xc0
+[  229.744175]  alloc_file+0x2b/0x110
+[  229.744177]  alloc_file_pseudo+0xa0/0x100
+[  229.744181]  sock_alloc_file+0x3f/0xa0
+[  229.744185]  __sys_socketpair+0x146/0x260
+[  229.744188]  __x64_sys_socketpair+0x1e/0x30
+[  229.744191]  do_syscall_64+0x61/0xb0
+[  229.744194]  ? fpregs_assert_state_consistent+0x23/0x50
+[  229.744199]  ? exit_to_user_mode_prepare+0x45/0x210
+[  229.744203]  ? do_user_addr_fault+0x1e4/0x670
+[  229.744208]  ? irqentry_exit_to_user_mode+0x9/0x20
+[  229.744211]  ? irqentry_exit+0x41/0x50
+[  229.744214]  ? exc_page_fault+0x92/0x1c0
+[  229.744216]  ? asm_exc_page_fault+0x8/0x30
+[  229.744220]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[  229.744223] RIP: 0033:0x7fe4567357de
+[  229.744227] Code: 48 8b 0d b5 b6 0c 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 49 89 ca b8 35 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 82 b6 0c 00 f7 d8 64 89 01 48
+[  229.744230] RSP: 002b:00007ffe130515a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000035
+[  229.744232] RAX: ffffffffffffffda RBX: 0000000000080001 RCX: 00007fe4567357de
+[  229.744234] RDX: 0000000000000000 RSI: 0000000000080001 RDI: 0000000000000001
+[  229.744236] RBP: 00007ffe130515e0 R08: 0000000000000000 R09: 0000000000000001
+[  229.744237] R10: 00007ffe130515b8 R11: 0000000000000246 R12: 0000000000000000
+[  229.744238] R13: 00007ffe13051638 R14: 0000000000000000 R15: 0000000004973c60
+[  229.744242] ---[ end trace 0000000000000003 ]---
+[  229.744279] ------------[ cut here ]------------
+[  229.744279] WARNING: CPU: 2 PID: 2544 at kernel/rcu/tree_plugin.h:359 rcu_note_context_switch+0x4f/0x4f0
+[  229.744286] Modules linked in: snd_hda_codec_hdmi snd_hda_codec_realtek snd_hda_codec_generic binfmt_misc xt_conntrack xt_MASQUERADE nf_conntrack_netlink nfnetlink xfrm_user xfrm_algo xt_addrtype iptable_filter iptable_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 bpfilter br_netfilter bridge stp llc ccm overlay nls_iso8859_1 dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua intel_rapl_msr mei_hdcp intel_rapl_common x86_pkg_temp_thermal intel_powerclamp coretemp snd_sof_pci_intel_tgl kvm_intel snd_sof_intel_hda_common kvm soundwire_intel soundwire_generic_allocation soundwire_cadence snd_sof_intel_hda intel_cstate snd_sof_pci snd_sof_xtensa_dsp snd_sof snd_soc_hdac_hda snd_hda_ext_core snd_soc_acpi_intel_match snd_soc_acpi soundwire_bus ledtrig_audio asus_nb_wmi asus_wmi snd_soc_core sparse_keymap intel_wmi_thunderbolt wmi_bmof snd_compress ac97_bus snd_pcm_dmaengine snd_hda_intel snd_intel_dspcfg snd_intel_sdw_acpi snd_hda_codec iTCO_wdt snd_hda_core iwlmvm intel_pmc_bxt
+[  229.744321]  snd_hwdep iTCO_vendor_support snd_pcm mac80211 libarc4 snd_timer snd btusb soundcore iwlwifi btrtl btbcm btintel cfg80211 bluetooth ecdh_generic ecc 8250_dw ti_adc128s052 industrialio mac_hid acpi_tad acpi_pad mei_me mei igen6_edac sch_fq_codel ipmi_devintf ipmi_msghandler ramoops msr reed_solomon efi_pstore ip_tables x_tables autofs4 btrfs blake2b_generic zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear spi_pxa2xx_platform dw_dmac dw_dmac_core mmc_block crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_intel crypto_simd cryptd i915 drm_kms_helper syscopyarea sysfillrect sysimgblt i2c_i801 fb_sys_fops i2c_smbus igb igc cec sdhci_pci dca i2c_algo_bit rc_core cqhci intel_lpss_pci ahci intel_lpss sdhci xhci_pci libahci drm xhci_pci_renesas idma64 wmi spidev video pinctrl_elkhartlake
+[  229.744365] CPU: 2 PID: 2544 Comm: node Tainted: G      D           5.13.0-rt1 #1
+[  229.744368] Hardware name: AAEON UPN-EHL01/UPN-EHL01, BIOS UNEHAM19 04/07/2022
+[  229.744369] RIP: 0010:rcu_note_context_switch+0x4f/0x4f0
+[  229.744372] Code: f2 ac 00 89 c0 48 03 1c c5 00 69 6b 9c 0f 1f 44 00 00 45 84 ed 75 15 65 48 8b 04 25 00 7c 01 00 8b b8 d4 07 00 00 85 ff 7e 02 <0f> 0b 65 48 8b 04 25 00 7c 01 00 8b b0 d4 07 00 00 85 f6 7e 0e 41
+[  229.744375] RSP: 0018:ffffa639c20877c8 EFLAGS: 00010002
+[  229.744376] RAX: ffff99a1074d6000 RBX: ffff99a264129180 RCX: 0000000000000000
+[  229.744378] RDX: 0000000000000000 RSI: ffffffff9c5c9607 RDI: 0000000000000001
+[  229.744379] RBP: ffffa639c20877e8 R08: 0000000000000000 R09: ffffa639c2087880
+[  229.744380] R10: 0000000000000001 R11: 0000000000000001 R12: ffff99a264128400
+[  229.744382] R13: 0000000000000000 R14: ffff99a1074d6000 R15: 0000000000000000
+[  229.744383] FS:  00007fe4566107c0(0000) GS:ffff99a264100000(0000) knlGS:0000000000000000
+[  229.744385] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  229.744386] CR2: 00002a9c53636000 CR3: 00000001078b4000 CR4: 0000000000350ee0
+[  229.744388] Call Trace:
+[  229.744390]  __schedule+0xbe/0x960
+[  229.744392]  ? preempt_count_add+0x74/0xc0
+[  229.744397]  schedule+0x52/0x100
+[  229.744400]  schedule_timeout+0x1b2/0x270
+[  229.744403]  ? del_timer_sync+0xb0/0xb0
+[  229.744408]  msleep+0x2e/0x40
+[  229.744410]  pr_flush+0x13c/0x170
+[  229.744413]  ? get_partial_node.part.0+0x397/0x480
+[  229.744416]  print_oops_end_marker+0x36/0x38
+[  229.744421]  __warn.cold+0x13/0x3f
+[  229.744424]  ? get_partial_node.part.0+0x397/0x480
+[  229.744427]  report_bug+0xd6/0x100
+[  229.744432]  handle_bug+0x39/0x80
+[  229.744434]  exc_invalid_op+0x19/0x70
+[  229.744437]  asm_exc_invalid_op+0x12/0x20
+[  229.744440] RIP: 0010:get_partial_node.part.0+0x397/0x480
+[  229.744443] Code: 50 4c 89 4c 24 38 4c 89 44 24 40 e8 a3 74 fd ff 4c 8b 44 24 40 4c 8b 4c 24 38 84 c0 0f 84 d4 fe ff ff e9 1e fd ff ff 4d 89 c5 <0f> 0b e9 82 fd ff ff 48 89 74 24 38 48 89 4c 24 30 4c 89 44 24 20
+[  229.744445] RSP: 0018:ffffa639c2087ac0 EFLAGS: 00010246
+[  229.744447] RAX: ffff99a1001de080 RBX: 0000000000000000 RCX: 0000000080190019
+[  229.744448] RDX: ffffe40744412e88 RSI: 0000000000000000 RDI: ffff99a1001de080
+[  229.744450] RBP: ffffa639c2087ba0 R08: ffff99a1050a28c0 R09: ffff99a1001dde00
+[  229.744451] R10: ffff99a1074d6001 R11: 0000000000000000 R12: ffffe40744079a00
+[  229.744452] R13: ffff99a1050a28c0 R14: 0000000000000019 R15: 0000000000190019
+[  229.744455]  ? __mod_memcg_lruvec_state+0xd4/0x180
+[  229.744459]  ? debug_smp_processor_id+0x17/0x20
+[  229.744462]  ? rt_spin_unlock+0x18/0x50
+[  229.744466]  ___slab_alloc+0x6a8/0x910
+[  229.744469]  ? __alloc_file+0x28/0x130
+[  229.744472]  ? __d_alloc+0x27/0x220
+[  229.744474]  ? debug_smp_processor_id+0x17/0x20
+[  229.744477]  ? __alloc_file+0x28/0x130
+[  229.744479]  __slab_alloc.isra.0+0x4a/0x60
+[  229.744482]  ? __alloc_file+0x28/0x130
+[  229.744485]  kmem_cache_alloc+0xb8/0x430
+[  229.744488]  __alloc_file+0x28/0x130
+[  229.744490]  alloc_empty_file+0x46/0xc0
+[  229.744493]  alloc_file+0x2b/0x110
+[  229.744495]  alloc_file_pseudo+0xa0/0x100
+[  229.744498]  sock_alloc_file+0x3f/0xa0
+[  229.744501]  __sys_socketpair+0x146/0x260
+[  229.744504]  __x64_sys_socketpair+0x1e/0x30
+[  229.744506]  do_syscall_64+0x61/0xb0
+[  229.744508]  ? fpregs_assert_state_consistent+0x23/0x50
+[  229.744511]  ? exit_to_user_mode_prepare+0x45/0x210
+[  229.744514]  ? do_user_addr_fault+0x1e4/0x670
+[  229.744518]  ? irqentry_exit_to_user_mode+0x9/0x20
+[  229.744521]  ? irqentry_exit+0x41/0x50
+[  229.744523]  ? exc_page_fault+0x92/0x1c0
+[  229.744526]  ? asm_exc_page_fault+0x8/0x30
+[  229.744529]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[  229.744532] RIP: 0033:0x7fe4567357de
+[  229.744534] Code: 48 8b 0d b5 b6 0c 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 49 89 ca b8 35 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 82 b6 0c 00 f7 d8 64 89 01 48
+[  229.744536] RSP: 002b:00007ffe130515a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000035
+[  229.744539] RAX: ffffffffffffffda RBX: 0000000000080001 RCX: 00007fe4567357de
+[  229.744540] RDX: 0000000000000000 RSI: 0000000000080001 RDI: 0000000000000001
+[  229.744541] RBP: 00007ffe130515e0 R08: 0000000000000000 R09: 0000000000000001
+[  229.744542] R10: 00007ffe130515b8 R11: 0000000000000246 R12: 0000000000000000
+[  229.744544] R13: 00007ffe13051638 R14: 0000000000000000 R15: 0000000004973c60
+[  229.744547] ---[ end trace 0000000000000004 ]---
+[  231.637912] RIP: 0010:deactivate_slab+0x5b9/0x620
+[  231.637923] Code: 30 4c 8b 44 24 28 48 89 c3 e9 e2 fc ff ff e8 15 de d0 ff e9 23 fd ff ff 48 8b 7e 30 48 89 46 30 49 89 4c 24 08 49 89 7c 24 10 <48> 89 07 41 8b 46 08 e9 41 fc ff ff 48 8b 7c 24 48 e8 51 57 92 00
+[  231.637926] RSP: 0018:ffffa639c1eb79a0 EFLAGS: 00010246
+[  231.637929] RAX: ffffe4074415c110 RBX: 0000000000000000 RCX: ffff99a1001dfef8
+[  231.637931] RDX: 00000001ffffffff RSI: ffff99a1001dfed0 RDI: 0000054000000150
+[  231.637932] RBP: ffffa639c1eb7a70 R08: 0000000000190010 R09: 0000000000000000
+[  231.637934] R10: 0000000000000007 R11: 0000000000190010 R12: ffffe4074415c108
+[  231.637935] R13: 0000000000000000 R14: ffff99a1001dde00 R15: 0000000000000001
+[  231.637937] FS:  00007ff69fa10f40(0000) GS:ffff99a264000000(0000) knlGS:0000000000000000
+[  231.637939] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  231.637940] CR2: 0000054000000150 CR3: 0000000108760000 CR4: 0000000000350ef0
+[  231.638417] general protection fault, maybe for address 0xffffe40744412ea8: 0000 [#2] PREEMPT_RT SMP NOPTI
+[  231.638423] CPU: 0 PID: 468 Comm: systemd-journal Tainted: G      D W         5.13.0-rt1 #1
+[  231.638427] Hardware name: AAEON UPN-EHL01/UPN-EHL01, BIOS UNEHAM19 04/07/2022
+[  231.638428] RIP: 0010:___slab_alloc+0x121/0x910
+[  231.638434] Code: 20 4d 85 ed 0f 85 71 05 00 00 65 48 8b 04 25 00 7c 01 00 4d 89 f5 48 89 44 24 28 48 89 44 24 40 eb 16 48 89 da 4c 89 f0 31 db <f0> 49 0f c7 4d 20 0f 84 48 01 00 00 f3 90 49 8b 5d 28 4d 8b 75 20
+[  231.638436] RSP: 0018:ffffa639c0547ae0 EFLAGS: 00010246
+[  231.638439] RAX: 0000000000190019 RBX: 0000000000000000 RCX: 00000001ffff7fff
+[  231.638440] RDX: 00000001ffffffff RSI: ffffffff9c5c9607 RDI: ffff99a26402edd0
+[  231.638442] RBP: ffffa639c0547bb8 R08: ffff99a26402edd0 R09: ffff99a102796000
+[  231.638443] R10: 0000000000000023 R11: 0000000000000000 R12: ffff99a26402edd0
+[  231.638444] R13: ffffe40744412e88 R14: 0000000000190019 R15: ffff99a1001dde00
+[  231.638446] FS:  00007f7d41988980(0000) GS:ffff99a264000000(0000) knlGS:0000000000000000
+[  231.638448] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  231.638450] CR2: 0000054000000150 CR3: 0000000102d82000 CR4: 0000000000350ef0
+[  231.638452] Call Trace:
+[  231.638457]  ? __alloc_file+0x28/0x130
+[  231.638462]  ? debug_smp_processor_id+0x17/0x20
+[  231.638468]  ? __alloc_file+0x28/0x130
+[  231.638470]  __slab_alloc.isra.0+0x4a/0x60
+[  231.638473]  ? __alloc_file+0x28/0x130
+[  231.638476]  kmem_cache_alloc+0xb8/0x430
+[  231.638480]  __alloc_file+0x28/0x130
+[  231.638482]  ? string_nocheck+0x4f/0x60
+[  231.638486]  alloc_empty_file+0x46/0xc0
+[  231.638489]  path_openat+0x4c/0x1140
+[  231.638492]  ? rt_spin_unlock+0x18/0x50
+[  231.638496]  ? getname_flags+0x4f/0x1f0
+[  231.638501]  do_filp_open+0xa2/0x110
+[  231.638504]  ? debug_smp_processor_id+0x17/0x20
+[  231.638507]  ? migrate_enable+0xa4/0x100
+[  231.638512]  ? __slab_alloc.isra.0+0x52/0x60
+[  231.638516]  ? rt_spin_unlock+0x18/0x50
+[  231.638519]  ? alloc_fd+0xf7/0x1a0
+[  231.638523]  do_sys_openat2+0x241/0x310
+[  231.638527]  do_sys_open+0x46/0x80
+[  231.638531]  __x64_sys_openat+0x20/0x30
+[  231.638534]  do_syscall_64+0x61/0xb0
+[  231.638537]  ? common_interrupt+0x72/0xe0
+[  231.638539]  ? asm_common_interrupt+0x8/0x40
+[  231.638542]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[  231.638545] RIP: 0033:0x7f7d428a4db4
+[  231.638549] Code: 24 20 eb 8f 66 90 44 89 54 24 0c e8 46 68 f8 ff 44 8b 54 24 0c 44 89 e2 48 89 ee 41 89 c0 bf 9c ff ff ff b8 01 01 00 00 0f 05 <48> 3d 00 f0 ff ff 77 32 44 89 c7 89 44 24 0c e8 78 68 f8 ff 8b 44
+[  231.638551] RSP: 002b:00007fffe9b893a0 EFLAGS: 00000293 ORIG_RAX: 0000000000000101
+[  231.638554] RAX: ffffffffffffffda RBX: 0000000000000005 RCX: 00007f7d428a4db4
+[  231.638555] RDX: 0000000000080802 RSI: 000055db41bfe670 RDI: 00000000ffffff9c
+[  231.638557] RBP: 000055db41bfe670 R08: 0000000000000000 R09: 6635373262653933
+[  231.638558] R10: 0000000000000000 R11: 0000000000000293 R12: 0000000000080802
+[  231.638560] R13: 000055db41bdde70 R14: 000055db41bd9ec0 R15: 0000000000000200
+[  231.638564] Modules linked in: snd_hda_codec_hdmi snd_hda_codec_realtek snd_hda_codec_generic binfmt_misc xt_conntrack xt_MASQUERADE nf_conntrack_netlink nfnetlink xfrm_user xfrm_algo xt_addrtype iptable_filter iptable_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 bpfilter br_netfilter bridge stp llc ccm overlay nls_iso8859_1 dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua intel_rapl_msr mei_hdcp intel_rapl_common x86_pkg_temp_thermal intel_powerclamp coretemp snd_sof_pci_intel_tgl kvm_intel snd_sof_intel_hda_common kvm soundwire_intel soundwire_generic_allocation soundwire_cadence snd_sof_intel_hda intel_cstate snd_sof_pci snd_sof_xtensa_dsp snd_sof snd_soc_hdac_hda snd_hda_ext_core snd_soc_acpi_intel_match snd_soc_acpi soundwire_bus ledtrig_audio asus_nb_wmi asus_wmi snd_soc_core sparse_keymap intel_wmi_thunderbolt wmi_bmof snd_compress ac97_bus snd_pcm_dmaengine snd_hda_intel snd_intel_dspcfg snd_intel_sdw_acpi snd_hda_codec iTCO_wdt snd_hda_core iwlmvm intel_pmc_bxt
+[  231.638618]  snd_hwdep iTCO_vendor_support snd_pcm mac80211 libarc4 snd_timer snd btusb soundcore iwlwifi btrtl btbcm btintel cfg80211 bluetooth ecdh_generic ecc 8250_dw ti_adc128s052 industrialio mac_hid acpi_tad acpi_pad mei_me mei igen6_edac sch_fq_codel ipmi_devintf ipmi_msghandler ramoops msr reed_solomon efi_pstore ip_tables x_tables autofs4 btrfs blake2b_generic zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear spi_pxa2xx_platform dw_dmac dw_dmac_core mmc_block crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_intel crypto_simd cryptd i915 drm_kms_helper syscopyarea sysfillrect sysimgblt i2c_i801 fb_sys_fops i2c_smbus igb igc cec sdhci_pci dca i2c_algo_bit rc_core cqhci intel_lpss_pci ahci intel_lpss sdhci xhci_pci libahci drm xhci_pci_renesas idma64 wmi spidev video pinctrl_elkhartlake
+[  231.638687] ---[ end trace 0000000000000005 ]---
+[  231.746852] ------------[ cut here ]------------
+[  231.746857] WARNING: CPU: 2 PID: 2544 at mm/slub.c:2018 get_partial_node.part.0+0x397/0x480
+[  231.746869] Modules linked in: snd_hda_codec_hdmi snd_hda_codec_realtek snd_hda_codec_generic binfmt_misc xt_conntrack xt_MASQUERADE nf_conntrack_netlink nfnetlink xfrm_user xfrm_algo xt_addrtype iptable_filter iptable_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 bpfilter br_netfilter bridge stp llc ccm overlay nls_iso8859_1 dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua intel_rapl_msr mei_hdcp intel_rapl_common x86_pkg_temp_thermal intel_powerclamp coretemp snd_sof_pci_intel_tgl kvm_intel snd_sof_intel_hda_common kvm soundwire_intel soundwire_generic_allocation soundwire_cadence snd_sof_intel_hda intel_cstate snd_sof_pci snd_sof_xtensa_dsp snd_sof snd_soc_hdac_hda snd_hda_ext_core snd_soc_acpi_intel_match snd_soc_acpi soundwire_bus ledtrig_audio asus_nb_wmi asus_wmi snd_soc_core sparse_keymap intel_wmi_thunderbolt wmi_bmof snd_compress ac97_bus snd_pcm_dmaengine snd_hda_intel snd_intel_dspcfg snd_intel_sdw_acpi snd_hda_codec iTCO_wdt snd_hda_core iwlmvm intel_pmc_bxt
+[  231.746925]  snd_hwdep iTCO_vendor_support snd_pcm mac80211 libarc4 snd_timer snd btusb soundcore iwlwifi btrtl btbcm btintel cfg80211 bluetooth ecdh_generic ecc 8250_dw ti_adc128s052 industrialio mac_hid acpi_tad acpi_pad mei_me mei igen6_edac sch_fq_codel ipmi_devintf ipmi_msghandler ramoops msr reed_solomon efi_pstore ip_tables x_tables autofs4 btrfs blake2b_generic zstd_compress raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq libcrc32c raid1 raid0 multipath linear spi_pxa2xx_platform dw_dmac dw_dmac_core mmc_block crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_intel crypto_simd cryptd i915 drm_kms_helper syscopyarea sysfillrect sysimgblt i2c_i801 fb_sys_fops i2c_smbus igb igc cec sdhci_pci dca i2c_algo_bit rc_core cqhci intel_lpss_pci ahci intel_lpss sdhci xhci_pci libahci drm xhci_pci_renesas idma64 wmi spidev video pinctrl_elkhartlake
+[  231.747000] CPU: 2 PID: 2544 Comm: node Tainted: G      D W         5.13.0-rt1 #1
+[  231.747004] Hardware name: AAEON UPN-EHL01/UPN-EHL01, BIOS UNEHAM19 04/07/2022
+[  231.747006] RIP: 0010:get_partial_node.part.0+0x397/0x480
+[  231.747011] Code: 50 4c 89 4c 24 38 4c 89 44 24 40 e8 a3 74 fd ff 4c 8b 44 24 40 4c 8b 4c 24 38 84 c0 0f 84 d4 fe ff ff e9 1e fd ff ff 4d 89 c5 <0f> 0b e9 82 fd ff ff 48 89 74 24 38 48 89 4c 24 30 4c 89 44 24 20
+[  231.747014] RSP: 0018:ffffa639c2087ac0 EFLAGS: 00010246
+[  231.747016] RAX: ffff99a1001de080 RBX: 0000000000000000 RCX: 0000000080190019
+[  231.747018] RDX: ffffe4074415c108 RSI: 0000000000000000 RDI: ffff99a1001de080
+[  231.747020] RBP: ffffa639c2087ba0 R08: 0000000000000000 R09: ffff99a1001dde00
+[  231.747021] R10: 0000000000000003 R11: ffff99a2641284f0 R12: ffffe40744412e80
+[  231.747023] R13: 0000000000000000 R14: 0000000000000019 R15: 0000000000190019
+[  231.747025] FS:  00007fe4566107c0(0000) GS:ffff99a264100000(0000) knlGS:0000000000000000
+[  231.747027] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  231.747029] CR2: 000033a9b88ca048 CR3: 00000001078b4000 CR4: 0000000000350ee0
+[  231.747031] Call Trace:
+[  231.747039]  ? affine_move_task+0x2aa/0x620
+[  231.747047]  ___slab_alloc+0x6a8/0x910
+[  231.747050]  ? __alloc_file+0x28/0x130
+[  231.747056]  ? __alloc_file+0x28/0x130
+[  231.747058]  __slab_alloc.isra.0+0x4a/0x60
+[  231.747061]  ? __alloc_file+0x28/0x130
+[  231.747064]  kmem_cache_alloc+0xb8/0x430
+[  231.747067]  __alloc_file+0x28/0x130
+[  231.747070]  alloc_empty_file+0x46/0xc0
+[  231.747072]  alloc_file+0x2b/0x110
+[  231.747075]  alloc_file_pseudo+0xa0/0x100
+[  231.747078]  sock_alloc_file+0x3f/0xa0
+[  231.747083]  __sys_socketpair+0x163/0x260
+[  231.747087]  __x64_sys_socketpair+0x1e/0x30
+[  231.747089]  do_syscall_64+0x61/0xb0
+[  231.747093]  ? fpregs_assert_state_consistent+0x23/0x50
+[  231.747098]  ? exit_to_user_mode_prepare+0x45/0x210
+[  231.747102]  ? do_user_addr_fault+0x1e4/0x670
+[  231.747107]  ? irqentry_exit_to_user_mode+0x9/0x20
+[  231.747110]  ? irqentry_exit+0x41/0x50
+[  231.747113]  ? exc_page_fault+0x92/0x1c0
+[  231.747115]  ? asm_exc_page_fault+0x8/0x30
+[  231.747120]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[  231.747123] RIP: 0033:0x7fe4567357de
+[  231.747128] Code: 48 8b 0d b5 b6 0c 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 49 89 ca b8 35 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 82 b6 0c 00 f7 d8 64 89 01 48
+[  231.747131] RSP: 002b:00007ffe130515a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000035
+[  231.747133] RAX: ffffffffffffffda RBX: 0000000000080001 RCX: 00007fe4567357de
+[  231.747135] RDX: 0000000000000000 RSI: 0000000000080001 RDI: 0000000000000001
+[  231.747136] RBP: 00007ffe130515e0 R08: 0000000000000000 R09: 0000000000000001
+[  231.747138] R10: 00007ffe130515b8 R11: 0000000000000246 R12: 0000000000000000
+[  231.747139] R13: 00007ffe13051638 R14: 0000000000000000 R15: 0000000004973c60
+[  231.747143] ---[ end trace 0000000000000006 ]---
+[  231.953775] RIP: 0010:deactivate_slab+0x5b9/0x620
+[  231.953789] Code: 30 4c 8b 44 24 28 48 89 c3 e9 e2 fc ff ff e8 15 de d0 ff e9 23 fd ff ff 48 8b 7e 30 48 89 46 30 49 89 4c 24 08 49 89 7c 24 10 <48> 89 07 41 8b 46 08 e9 41 fc ff ff 48 8b 7c 24 48 e8 51 57 92 00
+[  231.953792] RSP: 0018:ffffa639c1eb79a0 EFLAGS: 00010246
+[  231.953796] RAX: ffffe4074415c110 RBX: 0000000000000000 RCX: ffff99a1001dfef8
+[  231.953798] RDX: 00000001ffffffff RSI: ffff99a1001dfed0 RDI: 0000054000000150
+[  231.953800] RBP: ffffa639c1eb7a70 R08: 0000000000190010 R09: 0000000000000000
+[  231.953802] R10: 0000000000000007 R11: 0000000000190010 R12: ffffe4074415c108
+[  231.953803] R13: 0000000000000000 R14: ffff99a1001dde00 R15: 0000000000000001
+[  231.953805] FS:  00007f7d41988980(0000) GS:ffff99a264000000(0000) knlGS:0000000000000000
+[  231.953807] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  231.953809] CR2: 00002e3d1496e5e8 CR3: 0000000102d82000 CR4: 0000000000350ef0
+[  231.958863] systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
